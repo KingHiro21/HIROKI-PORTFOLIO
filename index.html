@@ -1,1 +1,764 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hiroki Ichikawa — Executive Virtual Assistant & Operations Manager</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#13213b;
+    --ink-2:#1c3157;
+    --ink-3:#25406e;
+    --paper:#faf7f1;
+    --paper-2:#f1ecdf;
+    --line:#e2dbc9;
+    --line-dark:#33456e;
+    --brass:#b8863b;
+    --brass-light:#dcb06f;
+    --ok:#4c7a5e;
+    --ink-soft:#8a93a8;
+    --text:#1c2436;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--text);
+    font-family:'Inter', sans-serif;
+    font-size:17.5px;
+    line-height:1.65;
+  }
+  h1,h2,h3{
+    font-family:'Fraunces', serif;
+    margin:0;
+    color:inherit;
+  }
+  .eyebrow{
+    font-family:'IBM Plex Mono', monospace;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    font-size:.72rem;
+    font-weight:500;
+  }
+  a{color:inherit;}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 32px;}
+  img{max-width:100%;display:block;}
 
+  /* ===== FOLDER TAB NAV ===== */
+  .tabbar{
+    position:sticky; top:0; z-index:50;
+    background:var(--ink);
+    border-bottom:1px solid var(--line-dark);
+  }
+  .tabbar-inner{
+    max-width:1180px;margin:0 auto;padding:0 32px;
+    display:flex; gap:2px; overflow-x:auto;
+    scrollbar-width:none;
+  }
+  .tabbar-inner::-webkit-scrollbar{display:none;}
+  .tabbar a{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:.72rem;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+    text-decoration:none;
+    color:#b7c1d9;
+    white-space:nowrap;
+    padding:14px 18px 12px;
+    border-radius:8px 8px 0 0;
+    border:1px solid transparent;
+    border-bottom:none;
+    transition:.2s;
+    position:relative;
+    top:1px;
+  }
+  .tabbar a:hover{color:#fff; background:var(--ink-2);}
+  .tabbar a::before{content:attr(data-code) " ";color:var(--brass-light); font-weight:600;}
+
+  /* ===== HERO ===== */
+  .hero{
+    background:
+      radial-gradient(1100px 500px at 85% -10%, rgba(184,134,59,.18), transparent 60%),
+      var(--ink);
+    color:#f4f1e8;
+    padding:76px 0 96px;
+    border-bottom:1px solid var(--line-dark);
+  }
+  .hero-grid{
+    display:grid; grid-template-columns:1.5fr 1fr; gap:56px; align-items:start;
+  }
+  .hero .eyebrow{color:var(--brass-light); margin-bottom:18px;}
+  .hero h1{
+    font-size:clamp(2.6rem, 6vw, 4.6rem);
+    font-weight:600;
+    line-height:.98;
+    letter-spacing:-.01em;
+  }
+  .hero h1 span{color:var(--brass-light); display:block;}
+  .role-strip{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:.85rem;
+    letter-spacing:.03em;
+    color:#cfd6e6;
+    margin-top:22px;
+    display:flex; flex-wrap:wrap; gap:0 10px;
+  }
+  .role-strip b{color:#fff; font-weight:500;}
+  .tagline{
+    margin-top:22px; max-width:46ch;
+    font-size:1.12rem;
+    color:#dfe3ee;
+  }
+  .contact-row{
+    margin-top:30px; display:flex; flex-wrap:wrap; gap:10px 26px;
+    font-family:'IBM Plex Mono', monospace; font-size:.82rem; color:#cfd6e6;
+  }
+  .contact-row a{text-decoration:none;}
+  .contact-row a:hover{color:var(--brass-light);}
+  .cta-row{margin-top:34px; display:flex; flex-wrap:wrap; gap:14px;}
+  .btn{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:.78rem; letter-spacing:.06em; text-transform:uppercase;
+    padding:14px 22px; border-radius:3px; text-decoration:none;
+    display:inline-flex; align-items:center; gap:10px;
+    border:1px solid transparent;
+    transition:.2s;
+  }
+  .btn-brass{background:var(--brass); color:#1a1305; font-weight:600;}
+  .btn-brass:hover{background:var(--brass-light);}
+  .btn-outline{border-color:#4c5c82; color:#eef0f6;}
+  .btn-outline:hover{border-color:var(--brass-light); color:var(--brass-light);}
+
+  /* checklist card */
+  .plan-card{
+    background:var(--paper);
+    color:var(--text);
+    border-radius:4px;
+    padding:26px 26px 22px;
+    box-shadow:0 30px 60px -20px rgba(0,0,0,.5);
+    transform:rotate(1.4deg);
+    border:1px solid var(--line);
+    position:relative;
+  }
+  .plan-card::before{
+    content:"";
+    position:absolute; top:-10px; left:24px; width:60px; height:20px;
+    background:rgba(220,176,111,.55);
+    transform:rotate(-3deg);
+  }
+  .plan-card h3{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:.75rem; letter-spacing:.12em; text-transform:uppercase;
+    color:var(--brass); margin-bottom:16px;
+  }
+  .plan-card ul{list-style:none; margin:0; padding:0;}
+  .plan-card li{
+    display:flex; align-items:center; gap:12px;
+    padding:9px 0; border-bottom:1px dashed var(--line);
+    font-family:'Inter'; font-size:.98rem;
+  }
+  .plan-card li:last-child{border-bottom:none;}
+  .plan-card .tick{
+    width:18px; height:18px; border-radius:3px; background:var(--ok);
+    color:#fff; font-size:.7rem; display:flex; align-items:center; justify-content:center;
+    flex:none;
+  }
+  .quote-tab{
+    margin-top:20px;
+    font-family:'Fraunces', serif; font-style:italic;
+    font-size:1.05rem; color:#f4f1e8; line-height:1.4;
+    border-left:2px solid var(--brass); padding-left:16px;
+  }
+  .quote-tab b{font-style:normal; color:var(--brass-light); display:block; font-family:'IBM Plex Mono',monospace; font-size:.7rem; letter-spacing:.1em; text-transform:uppercase; margin-top:8px;}
+
+  /* ===== SECTION GENERIC ===== */
+  section{padding:88px 0;}
+  .section-head{margin-bottom:48px; max-width:60ch;}
+  .section-head .eyebrow{color:var(--brass); margin-bottom:10px;}
+  .section-head h2{font-size:clamp(1.8rem,3.4vw,2.5rem); font-weight:600;}
+  .on-ink{background:var(--ink); color:#eef0f6;}
+  .on-ink .section-head .eyebrow{color:var(--brass-light);}
+  .on-ink2{background:var(--ink-2); color:#eef0f6;}
+
+  /* SERVICES */
+  .grid-6{
+    display:grid; grid-template-columns:repeat(3,1fr); gap:1px;
+    background:var(--line); border:1px solid var(--line);
+  }
+  .svc-card{
+    background:var(--paper); padding:32px 28px; min-height:220px;
+    display:flex; flex-direction:column; gap:14px;
+  }
+  .svc-code{
+    font-family:'IBM Plex Mono', monospace; font-size:.72rem; color:var(--brass); letter-spacing:.08em;
+  }
+  .svc-card h3{font-size:1.15rem; font-weight:600;}
+  .svc-card p{margin:0; font-size:.98rem; color:#2c3345;}
+
+  /* CASE STUDIES */
+  .case-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:22px;}
+  .case-card{
+    background:var(--ink-3); border:1px solid var(--line-dark); border-radius:4px; padding:28px 26px;
+    display:flex; flex-direction:column; gap:14px; position:relative;
+  }
+  .case-tag{font-family:'IBM Plex Mono',monospace; font-size:.68rem; letter-spacing:.1em; color:var(--brass-light); text-transform:uppercase;}
+  .case-card h3{font-size:1.15rem; font-weight:600; color:#fff;}
+  .case-client{font-family:'IBM Plex Mono',monospace; font-size:.75rem; color:#aeb8cf;}
+  .case-card p{margin:0; font-size:.96rem; color:#e3e7f0;}
+  .case-card p b{color:#fff;}
+  .stamp-row{display:flex; gap:10px; flex-wrap:wrap; margin-top:6px;}
+  .stamp{
+    font-family:'IBM Plex Mono',monospace; font-size:.78rem; font-weight:600;
+    border:2px solid var(--brass-light); color:var(--brass-light);
+    padding:8px 12px; border-radius:3px; transform:rotate(-2deg);
+    display:inline-block;
+  }
+
+  /* EXPERIENCE */
+  .exp-list{border-top:1px solid var(--line);}
+  .exp-row{
+    display:grid; grid-template-columns:150px 1fr; gap:28px;
+    padding:26px 0; border-bottom:1px solid var(--line);
+  }
+  .exp-date{font-family:'IBM Plex Mono',monospace; font-size:.82rem; color:var(--brass); padding-top:3px;}
+  .exp-role{font-size:1.1rem; font-weight:600; font-family:'Fraunces',serif;}
+  .exp-org{font-family:'IBM Plex Mono',monospace; font-size:.78rem; color:#454e63; margin:2px 0 10px;}
+  .exp-row ul{margin:0; padding-left:18px; font-size:1rem; color:#2c3345;}
+  .exp-row li{margin-bottom:5px;}
+
+  /* SKILLS */
+  .skill-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:26px;}
+  .skill-card{background:var(--ink-3); border:1px solid var(--line-dark); border-radius:4px; padding:26px;}
+  .skill-card h3{
+    font-family:'IBM Plex Mono',monospace; font-size:.78rem; letter-spacing:.08em; text-transform:uppercase;
+    color:var(--brass-light); margin-bottom:14px; font-weight:600;
+  }
+  .skill-card ul{margin:0; padding:0; list-style:none;}
+  .skill-card li{
+    font-size:.97rem; color:#e2e6f0; padding:7px 0; border-bottom:1px dashed var(--line-dark);
+    display:flex; gap:10px;
+  }
+  .skill-card li:last-child{border-bottom:none;}
+  .skill-card li::before{content:"›"; color:var(--brass-light);}
+
+  /* TOOLS */
+  .tool-groups{display:grid; grid-template-columns:repeat(2,1fr); gap:32px;}
+  .tool-group h3{
+    font-family:'IBM Plex Mono',monospace; font-size:.75rem; text-transform:uppercase; letter-spacing:.1em;
+    color:var(--brass); margin-bottom:14px; border-bottom:1px solid var(--line); padding-bottom:10px;
+  }
+  .tool-badges{display:flex; flex-wrap:wrap; gap:8px;}
+  .tool-badges span{
+    font-family:'IBM Plex Mono',monospace; font-size:.78rem;
+    background:var(--paper-2); border:1px solid var(--line); padding:7px 12px; border-radius:3px;
+  }
+
+  /* INFRA */
+  .infra-grid{display:grid; grid-template-columns:repeat(5,1fr); gap:1px; background:var(--line); border:1px solid var(--line);}
+  .infra-card{background:var(--paper); padding:22px 18px;}
+  .infra-card h4{
+    font-family:'IBM Plex Mono',monospace; font-size:.68rem; letter-spacing:.08em; text-transform:uppercase;
+    color:var(--brass); margin:0 0 8px;
+  }
+  .infra-card p{margin:0; font-size:.85rem; color:#2c3345;}
+
+  /* TESTIMONIALS */
+  .test-grid{display:grid; grid-template-columns:1fr 1fr; gap:26px;}
+  .test-card{background:var(--paper); border:1px solid var(--line); border-left:3px solid var(--brass); padding:26px 28px; border-radius:2px;}
+  .test-card p{font-family:'Fraunces',serif; font-style:italic; font-size:1.08rem; margin:0 0 14px;}
+  .stars{color:var(--brass); font-size:.9rem; letter-spacing:2px;}
+  .test-by{font-family:'IBM Plex Mono',monospace; font-size:.78rem; color:#454e63; margin-top:8px;}
+
+  /* EDUCATION */
+  .edu-card{border:1px solid var(--line); border-radius:4px; padding:26px 28px; display:flex; justify-content:space-between; align-items:flex-start; gap:20px; flex-wrap:wrap;}
+  .edu-card h3{font-size:1.15rem;}
+  .edu-card .exp-date{padding-top:0;}
+
+  /* FOOTER */
+  footer{background:var(--ink); color:#eef0f6; padding:76px 0 46px; border-top:1px solid var(--line-dark);}
+  .footer-grid{display:grid; grid-template-columns:1.3fr 1fr; gap:50px; align-items:start;}
+  footer h2{font-size:clamp(1.8rem,4vw,2.6rem); font-weight:600;}
+  .foot-props{display:flex; gap:36px; flex-wrap:wrap; margin-top:36px;}
+  .foot-prop{max-width:170px;}
+  .foot-prop .eyebrow{color:var(--brass-light); display:block; margin-bottom:6px;}
+  .foot-prop p{margin:0; font-size:.85rem; color:#d3d9e8;}
+  .foot-bottom{
+    margin-top:60px; padding-top:26px; border-top:1px solid var(--line-dark);
+    display:flex; justify-content:space-between; flex-wrap:wrap; gap:12px;
+    font-family:'IBM Plex Mono',monospace; font-size:.75rem; color:#8a93a8;
+  }
+
+  @media (max-width:900px){
+    .hero-grid{grid-template-columns:1fr;}
+    .grid-6{grid-template-columns:repeat(2,1fr);}
+    .case-grid{grid-template-columns:1fr;}
+    .skill-grid{grid-template-columns:1fr;}
+    .tool-groups{grid-template-columns:1fr;}
+    .infra-grid{grid-template-columns:repeat(2,1fr);}
+    .test-grid{grid-template-columns:1fr;}
+    .footer-grid{grid-template-columns:1fr;}
+    .exp-row{grid-template-columns:1fr;}
+  }
+  @media (max-width:560px){
+    .grid-6{grid-template-columns:1fr;}
+    .infra-grid{grid-template-columns:1fr;}
+    .plan-card{transform:none;}
+  }
+</style>
+</head>
+<body>
+
+<nav class="tabbar">
+  <div class="tabbar-inner">
+    <a href="#services" data-code="SVC">Services</a>
+    <a href="#cases" data-code="CSE">Case Studies</a>
+    <a href="#experience" data-code="EXP">Experience</a>
+    <a href="#skills" data-code="SKL">Skills</a>
+    <a href="#tools" data-code="TLS">Tools</a>
+    <a href="#education" data-code="EDU">Education</a>
+    <a href="#contact" data-code="CTC">Contact</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="eyebrow">Detail-Oriented · Strategic · Reliable — I help you focus on growth</div>
+      <h1>HIROKI<span>ICHIKAWA</span></h1>
+      <div class="role-strip">
+        <b>Executive Virtual Assistant</b>&nbsp;|&nbsp;<b>Operations Manager</b>&nbsp;|&nbsp;<b>Digital Systems Specialist</b>
+      </div>
+      <p class="tagline">I help businesses streamline operations, scale efficiently, and stay organized so you can focus on growth.</p>
+      <div class="contact-row">
+        <a href="tel:09931318683">📞 0993-131-8683</a>
+        <a href="tel:09497219606">📞 0949-721-9606</a>
+        <a href="mailto:hirokiichikawa96@gmail.com">✉ hirokiichikawa96@gmail.com</a>
+        <span>📍 Based in Cebu City, PH — Available for Remote Work Worldwide</span>
+      </div>
+      <div class="cta-row">
+        <a class="btn btn-brass" href="Hiroki_Ichikawa_Resume.pdf" download>⬇ Download Resume (PDF)</a>
+        <a class="btn btn-outline" href="Hiroki_Ichikawa_Portfolio.jpg" download>⬇ Download Portfolio</a>
+        <a class="btn btn-outline" href="#contact">Let's Connect →</a>
+      </div>
+    </div>
+    <div>
+      <div class="plan-card">
+        <h3>Today's Plan</h3>
+        <ul>
+          <li><span class="tick">✓</span> Clients</li>
+          <li><span class="tick">✓</span> Projects</li>
+          <li><span class="tick">✓</span> Content</li>
+          <li><span class="tick">✓</span> Operations</li>
+          <li><span class="tick">✓</span> Growth</li>
+        </ul>
+      </div>
+      <div class="quote-tab">
+        “Organized systems. Stronger businesses. Better results.”
+      </div>
+    </div>
+  </div>
+</header>
+
+<section id="services">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">What I Can Do For You</div>
+      <h2>Services</h2>
+    </div>
+  </div>
+  <div class="wrap">
+    <div class="grid-6">
+      <div class="svc-card">
+        <div class="svc-code">SVC / EXEC</div>
+        <h3>Executive Support & Operations</h3>
+        <p>Inbox & calendar management, scheduling, travel, documentation, and day-to-day operations oversight.</p>
+      </div>
+      <div class="svc-card">
+        <div class="svc-code">SVC / MKT</div>
+        <h3>Digital Marketing Support</h3>
+        <p>Social media management, content planning, campaign support, and performance analytics.</p>
+      </div>
+      <div class="svc-card">
+        <div class="svc-code">SVC / SYS</div>
+        <h3>Business Systems & CRM</h3>
+        <p>CRM setup (HubSpot, GoHighLevel), automation, SOP creation, and reporting systems.</p>
+      </div>
+      <div class="svc-card">
+        <div class="svc-code">SVC / WEB</div>
+        <h3>Website & Tech Support</h3>
+        <p>WordPress/Elementor management, landing pages, website updates, and technical support.</p>
+      </div>
+      <div class="svc-card">
+        <div class="svc-code">SVC / PROC</div>
+        <h3>Procurement & Vendor Management</h3>
+        <p>Supplier sourcing, negotiation, inventory management, and cost reduction strategies.</p>
+      </div>
+      <div class="svc-card">
+        <div class="svc-code">SVC / DSGN</div>
+        <h3>Graphic & Design Support</h3>
+        <p>Branded graphics, presentations, social media visuals, and marketing materials.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="cases" class="on-ink2">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Proof Of Work</div>
+      <h2>Case Studies</h2>
+    </div>
+    <div class="case-grid">
+      <div class="case-card">
+        <div class="case-tag">Case / Procurement Optimization</div>
+        <h3>Procurement Optimization</h3>
+        <div class="case-client">Client: Cebu Sarah Inc</div>
+        <p><b>Problem:</b> Frequent stock shortages and high procurement costs.</p>
+        <p><b>What I Did:</b> Reorganized supplier workflow, negotiated better contracts, improved inventory tracking.</p>
+        <div class="stamp-row">
+          <span class="stamp">35% ↓ stock shortages</span>
+          <span class="stamp">12% annual savings</span>
+        </div>
+      </div>
+      <div class="case-card">
+        <div class="case-tag">Case / Hiring & Operations Scaling</div>
+        <h3>Hiring & Operations Scaling</h3>
+        <div class="case-client">Client: BridgeCreation DPS</div>
+        <p><b>Problem:</b> Slow hiring process and inefficient recruitment.</p>
+        <p><b>What I Did:</b> Led full-cycle recruitment, optimized hiring workflow, improved candidate filtering system.</p>
+        <div class="stamp-row">
+          <span class="stamp">30+ hires annually</span>
+          <span class="stamp">25% ↓ time-to-hire</span>
+        </div>
+      </div>
+      <div class="case-card">
+        <div class="case-tag">Case / Executive Support</div>
+        <h3>Executive Support (Freelance)</h3>
+        <div class="case-client">Clients: Multiple (3–5 at a time)</div>
+        <p><b>Problem:</b> Disorganized operations and overloaded executives.</p>
+        <p><b>What I Did:</b> Managed inbox, calendar, coordination, reporting & bookkeeping, and acted as communication bridge.</p>
+        <div class="stamp-row">
+          <span class="stamp">✓ Improved workflow efficiency</span>
+          <span class="stamp">✓ Increased productivity</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="experience">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Professional Experience</div>
+      <h2>Experience</h2>
+      <p style="font-family:'Inter'; font-size:1rem; color:#2c3345; margin-top:14px;">Operations-focused Executive Virtual Assistant and Operations Manager with over six years of experience supporting founders, executives, and growing businesses across business operations, executive support, procurement, recruitment, CRM administration, website management, and digital systems.</p>
+    </div>
+    <div class="exp-list">
+      <div class="exp-row">
+        <div class="exp-date">2025 – 2026</div>
+        <div>
+          <div class="exp-role">Website & Digital Operations Specialist</div>
+          <div class="exp-org">Core Migrations | Remote</div>
+          <ul>
+            <li>Managed and maintained WordPress websites, including page updates, content changes, and ongoing site improvements.</li>
+            <li>Built and optimized landing pages using Elementor.</li>
+            <li>Coordinated website projects, ensuring timely delivery and quality assurance.</li>
+            <li>Assisted with CRM organization, workflow improvements, and business process documentation.</li>
+            <li>Provided technical support for website issues, plugins, and client requests.</li>
+            <li>Collaborated with stakeholders to improve digital operations and user experience.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="exp-row">
+        <div class="exp-date">2024 – 2025</div>
+        <div>
+          <div class="exp-role">Operations Lead & VA Manager</div>
+          <div class="exp-org">VA Masters | Remote</div>
+          <ul>
+            <li>Supervised Virtual Assistants while maintaining quality assurance standards.</li>
+            <li>Coordinated executive scheduling and daily business operations.</li>
+            <li>Improved workflow efficiency through documentation and standardized processes.</li>
+            <li>Served as communication bridge between executives, clients, and internal teams.</li>
+            <li>Assisted in client onboarding and operational planning.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="exp-row">
+        <div class="exp-date">2024 – 2025</div>
+        <div>
+          <div class="exp-role">Operations Manager & Recruitment Specialist</div>
+          <div class="exp-org">BridgeCreation DPS | Remote | Contract</div>
+          <ul>
+            <li>Led full-cycle recruitment for 30+ hires annually.</li>
+            <li>Improved hiring efficiency, reducing time-to-hire by 25%.</li>
+            <li>Partnered with executives on workforce planning and retention strategies.</li>
+            <li>Managed recruitment operations from sourcing to onboarding.</li>
+            <li>Coordinated communication between management and applicants.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="exp-row">
+        <div class="exp-date">2018 – Present</div>
+        <div>
+          <div class="exp-role">Executive Virtual Assistant</div>
+          <div class="exp-org">Freelance | Remote</div>
+          <ul>
+            <li>Managed executive calendars, inboxes, travel arrangements, and documentation.</li>
+            <li>Maintained WordPress websites and landing pages.</li>
+            <li>Designed marketing graphics using Canva.</li>
+            <li>Built and maintained CRM systems.</li>
+            <li>Assisted with client onboarding and administrative support.</li>
+            <li>Supported founders with daily operations and project coordination.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="exp-row">
+        <div class="exp-date">2020 – 2023</div>
+        <div>
+          <div class="exp-role">Purchasing Manager</div>
+          <div class="exp-org">Cebu Sarah Inc.</div>
+          <ul>
+            <li>Managed supplier sourcing and procurement operations.</li>
+            <li>Negotiated supplier contracts to reduce purchasing costs (saving 12% annually).</li>
+            <li>Improved inventory management processes, reducing stock shortages by 35%.</li>
+            <li>Coordinated purchasing logistics and vendor relationships.</li>
+            <li>Supported business operations through procurement planning.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="exp-row">
+        <div class="exp-date">—</div>
+        <div>
+          <div class="exp-role">Teacher</div>
+          <div class="exp-org">S1 Talk</div>
+          <ul>
+            <li>Teach English language mostly to Chinese kids in a fun and engaging way.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="exp-row">
+        <div class="exp-date">—</div>
+        <div>
+          <div class="exp-role">Sales Admin & Finance Pool</div>
+          <div class="exp-org">Orix Metro Leasing and Finance Corp.</div>
+          <ul>
+            <li>Supported sales and finance teams with documentation, client records, and billing accuracy.</li>
+            <li>Ensured data accuracy and smooth administrative processes.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="skills" class="on-ink">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Core Competencies</div>
+      <h2>Skills & Expertise</h2>
+    </div>
+    <div class="skill-grid">
+      <div class="skill-card">
+        <h3>Executive & Operations</h3>
+        <ul>
+          <li>Executive Assistance & Scheduling</li>
+          <li>Operations Management</li>
+          <li>Workflow Optimization</li>
+          <li>SOP Creation & Process Automation</li>
+        </ul>
+      </div>
+      <div class="skill-card">
+        <h3>Leadership & Strategy</h3>
+        <ul>
+          <li>Leadership & Team Coordination</li>
+          <li>Business Strategy Support</li>
+          <li>Talent Acquisition & Recruitment</li>
+          <li>Workforce Planning</li>
+        </ul>
+      </div>
+      <div class="skill-card">
+        <h3>Communication & Client Management</h3>
+        <ul>
+          <li>Client & Staff Communication</li>
+          <li>Executive Coordination</li>
+          <li>Inbox & Calendar Management</li>
+          <li>Documentation & Reporting</li>
+        </ul>
+      </div>
+      <div class="skill-card">
+        <h3>Finance & Business Support</h3>
+        <ul>
+          <li>Bookkeeping & Reporting</li>
+          <li>Procurement & Vendor Negotiation</li>
+          <li>Inventory Management</li>
+        </ul>
+      </div>
+      <div class="skill-card">
+        <h3>Digital & Creative</h3>
+        <ul>
+          <li>Graphic Design (Canva)</li>
+          <li>WordPress & Elementor</li>
+          <li>Website Management</li>
+          <li>Content & Social Media Support</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="tools">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Technology Proficiency</div>
+      <h2>Tools I Use</h2>
+    </div>
+    <div class="tool-groups">
+      <div class="tool-group">
+        <h3>Productivity & Work Management</h3>
+        <div class="tool-badges">
+          <span>Google Workspace</span><span>Microsoft Office</span><span>Notion</span>
+          <span>ClickUp</span><span>Asana</span><span>Trello</span><span>Slack</span><span>Zoom</span>
+        </div>
+      </div>
+      <div class="tool-group">
+        <h3>CRM & Marketing</h3>
+        <div class="tool-badges">
+          <span>HubSpot</span><span>GoHighLevel</span><span>Social Media Scheduling</span><span>Email Management</span>
+        </div>
+      </div>
+      <div class="tool-group">
+        <h3>Web & Development</h3>
+        <div class="tool-badges">
+          <span>WordPress</span><span>Elementor</span>
+        </div>
+      </div>
+      <div class="tool-group">
+        <h3>Design & Content</h3>
+        <div class="tool-badges">
+          <span>Canva</span><span>Adobe Express</span>
+        </div>
+      </div>
+      <div class="tool-group">
+        <h3>Marketing & Scheduling</h3>
+        <div class="tool-badges">
+          <span>Meta Business Suite</span><span>Buffer</span>
+        </div>
+      </div>
+      <div class="tool-group">
+        <h3>Finance</h3>
+        <div class="tool-badges">
+          <span>QuickBooks</span>
+        </div>
+      </div>
+    </div>
+    <p style="margin-top:28px; font-size:.92rem; color:#454e63;">★ Experienced with a wide range of tools and systems tailored to client needs.</p>
+  </div>
+</section>
+
+<section class="on-ink2">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Setup & Reliability</div>
+      <h2>Remote Work Infrastructure</h2>
+    </div>
+    <div class="infra-grid">
+      <div class="infra-card">
+        <h4>Internet</h4>
+        <p>Converge 1000Mbps (Primary) · Smart 5G mobile hotspot (backup)</p>
+      </div>
+      <div class="infra-card">
+        <h4>Power Backup</h4>
+        <p>APC UPS 1100VA — 3-hour runtime · Building generator access</p>
+      </div>
+      <div class="infra-card">
+        <h4>Equipment</h4>
+        <p>Ryzen 7 processor · 16GB RAM · RTX 3050 · Triple monitors · Noise cancelling headset · Fifine AM8T Mic · HD webcam</p>
+      </div>
+      <div class="infra-card">
+        <h4>Workspace</h4>
+        <p>Dedicated home office · Quiet, professional environment</p>
+      </div>
+      <div class="infra-card">
+        <h4>Availability</h4>
+        <p>Full-time · EST · PST · AEST — flexible across US, UK, and Australian time zones</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">What Clients Say</div>
+      <h2>Testimonials</h2>
+    </div>
+    <div class="test-grid">
+      <div class="test-card">
+        <div class="stars">★★★★★</div>
+        <p>“Communication was seamless and deadlines were always met. Our productivity improved significantly thanks to Hiroki's support and attention to detail.”</p>
+        <div class="test-by">— Marketing Manager</div>
+      </div>
+      <div class="test-card">
+        <div class="stars">★★★★★</div>
+        <p>“Detail-oriented and easy to work with. Hiroki helped streamline our systems and saved us countless hours every week.”</p>
+        <div class="test-by">— Founder, Digital Agency</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="education" class="on-ink">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Education</div>
+      <h2>Background</h2>
+    </div>
+    <div class="edu-card" style="background:var(--ink-3); border-color:var(--line-dark); color:#eef0f6;">
+      <div>
+        <h3>University Of Cebu, Lapu-Lapu Mandaue</h3>
+        <div class="exp-org" style="color:#aeb8cf;">Computer Technology</div>
+        <p style="margin-top:10px; font-size:1rem; color:#e3e7f0;">Relevant coursework in Design and Project Management.</p>
+      </div>
+      <div class="exp-date" style="color:var(--brass-light);">2015 – 2020</div>
+    </div>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="wrap footer-grid">
+    <div>
+      <div class="eyebrow" style="color:var(--brass-light); margin-bottom:12px;">Let's Work Together</div>
+      <h2>Send me a message and let's talk about how I can help streamline your operations and drive results.</h2>
+      <div class="cta-row">
+        <a class="btn btn-brass" href="Hiroki_Ichikawa_Resume.pdf" download>⬇ Download Resume</a>
+        <a class="btn btn-outline" href="Hiroki_Ichikawa_Portfolio.jpg" download>⬇ Download Portfolio</a>
+        <a class="btn btn-outline" href="mailto:hirokiichikawa96@gmail.com">✉ Email Me</a>
+      </div>
+    </div>
+    <div class="foot-props">
+      <div class="foot-prop">
+        <span class="eyebrow">Strategic</span>
+        <p>Solutions tailored to your goals</p>
+      </div>
+      <div class="foot-prop">
+        <span class="eyebrow">Efficient</span>
+        <p>Operations that save you time & money</p>
+      </div>
+      <div class="foot-prop">
+        <span class="eyebrow">Reliable</span>
+        <p>You can count on me and my work</p>
+      </div>
+    </div>
+  </div>
+  <div class="wrap foot-bottom">
+    <span>Hiroki Ichikawa — Cebu City, Philippines</span>
+    <span>hirokiichikawa96@gmail.com · 0993-131-8683 / 0949-721-9606</span>
+  </div>
+</footer>
+
+</body>
+</html>
