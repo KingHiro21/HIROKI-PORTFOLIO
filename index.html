@@ -218,17 +218,29 @@
     display:inline-block;
   }
 
-  /* EXPERIENCE */
-  .exp-list{border-top:1px solid var(--line);}
-  .exp-row{
-    display:grid; grid-template-columns:150px 1fr; gap:28px;
-    padding:26px 0; border-bottom:1px solid var(--line);
-  }
-  .exp-date{font-family:'IBM Plex Mono',monospace; font-size:.82rem; color:var(--brass); padding-top:3px;}
+  /* EXPERIENCE — card grid */
+  .exp-date{font-family:'IBM Plex Mono',monospace; font-size:.82rem; color:var(--brass);}
   .exp-role{font-size:1.1rem; font-weight:600; font-family:'Fraunces',serif;}
   .exp-org{font-family:'IBM Plex Mono',monospace; font-size:.78rem; color:#454e63; margin:2px 0 10px;}
-  .exp-row ul{margin:0; padding-left:18px; font-size:1rem; color:#2c3345;}
-  .exp-row li{margin-bottom:5px;}
+  .exp-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:18px;}
+  .exp-card{
+    background:var(--paper); border:1px solid var(--line); border-radius:4px;
+    padding:24px 26px; display:flex; flex-direction:column;
+  }
+  .exp-card-top{display:flex; justify-content:space-between; align-items:baseline; gap:12px; flex-wrap:wrap;}
+  .exp-card .exp-date{font-size:.72rem; white-space:nowrap;}
+  .exp-card .exp-role{font-size:1.05rem;}
+  .exp-lead{margin:0; font-size:.95rem; color:#2c3345;}
+  .exp-more summary{
+    cursor:pointer; list-style:none; margin-top:12px;
+    font-family:'IBM Plex Mono',monospace; font-size:.7rem; letter-spacing:.08em; text-transform:uppercase;
+    color:var(--brass); user-select:none;
+  }
+  .exp-more summary::-webkit-details-marker{display:none;}
+  .exp-more summary::before{content:"+ Details";}
+  .exp-more[open] summary::before{content:"– Details";}
+  .exp-more ul{margin:10px 0 0; padding-left:18px; font-size:.92rem; color:#2c3345;}
+  .exp-more li{margin-bottom:5px;}
 
   /* SKILLS */
   .skill-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:26px;}
@@ -266,12 +278,44 @@
   }
   .infra-card p{margin:0; font-size:.85rem; color:#2c3345;}
 
-  /* TESTIMONIALS */
-  .test-grid{display:grid; grid-template-columns:1fr 1fr; gap:26px;}
-  .test-card{background:var(--paper); border:1px solid var(--line); border-left:3px solid var(--brass); padding:26px 28px; border-radius:2px;}
-  .test-card p{font-family:'Fraunces',serif; font-style:italic; font-size:1.08rem; margin:0 0 14px;}
+  /* TESTIMONIALS — animated carousel */
+  .test-wrap{position:relative; overflow:hidden;}
+  .test-track{
+    display:flex;
+    transition:transform .65s cubic-bezier(.65,0,.35,1);
+  }
+  .test-slide{
+    flex:0 0 100%;
+    max-width:100%;
+    padding:4px 4px 4px 0;
+  }
+  .test-card{
+    background:var(--paper); border:1px solid var(--line); border-left:3px solid var(--brass);
+    padding:34px 38px; border-radius:2px;
+    opacity:.35; transform:scale(.97);
+    transition:opacity .5s ease, transform .5s ease;
+    max-width:720px;
+  }
+  .test-slide.is-active .test-card{opacity:1; transform:scale(1);}
+  .test-card p{font-family:'Fraunces',serif; font-style:italic; font-size:1.22rem; margin:0 0 16px; line-height:1.5;}
   .stars{color:var(--brass); font-size:.9rem; letter-spacing:2px;}
-  .test-by{font-family:'IBM Plex Mono',monospace; font-size:.78rem; color:#454e63; margin-top:8px;}
+  .test-by{font-family:'IBM Plex Mono',monospace; font-size:.78rem; color:#454e63; margin-top:10px;}
+  .test-by b{color:var(--ink); font-weight:600;}
+  .test-nav{display:flex; align-items:center; gap:18px; margin-top:30px;}
+  .test-dots{display:flex; gap:9px;}
+  .test-dot{
+    width:9px; height:9px; border-radius:50%; border:1px solid var(--brass);
+    background:transparent; padding:0; cursor:pointer; transition:.25s;
+  }
+  .test-dot.is-active{background:var(--brass); width:26px; border-radius:5px;}
+  .test-arrow{
+    width:36px; height:36px; border-radius:50%; border:1px solid var(--line);
+    background:var(--paper); cursor:pointer; display:flex; align-items:center; justify-content:center;
+    font-family:'IBM Plex Mono',monospace; color:var(--ink); transition:.2s;
+  }
+  .test-arrow:hover{border-color:var(--brass); color:var(--brass); background:var(--paper-2);}
+  section.reveal{opacity:0; transform:translateY(18px); transition:opacity .7s ease, transform .7s ease;}
+  section.reveal.in-view{opacity:1; transform:translateY(0);}
 
   /* EDUCATION */
   .edu-card{border:1px solid var(--line); border-radius:4px; padding:26px 28px; display:flex; justify-content:space-between; align-items:flex-start; gap:20px; flex-wrap:wrap;}
@@ -299,9 +343,8 @@
     .skill-grid{grid-template-columns:1fr;}
     .tool-groups{grid-template-columns:1fr;}
     .infra-grid{grid-template-columns:repeat(2,1fr);}
-    .test-grid{grid-template-columns:1fr;}
     .footer-grid{grid-template-columns:1fr;}
-    .exp-row{grid-template-columns:1fr;}
+    .exp-grid{grid-template-columns:1fr;}
   }
   @media (max-width:560px){
     .grid-6{grid-template-columns:1fr;}
@@ -457,12 +500,35 @@
       <h2>Experience</h2>
       <p style="font-family:'Inter'; font-size:1rem; color:#2c3345; margin-top:14px;">Operations-focused Executive Virtual Assistant and Operations Manager with over six years of experience supporting founders, executives, and growing businesses across business operations, executive support, procurement, recruitment, CRM administration, website management, and digital systems.</p>
     </div>
-    <div class="exp-list">
-      <div class="exp-row">
-        <div class="exp-date">2025 – 2026</div>
-        <div>
+    <div class="exp-grid">
+
+      <div class="exp-card">
+        <div class="exp-card-top">
+          <div class="exp-role">Web Developer & Marketing Trainer</div>
+          <div class="exp-date">Jul – Sep 2026</div>
+        </div>
+        <div class="exp-org">HwaSung Refrigeration | Contract</div>
+        <p class="exp-lead">Built out the company website and trained the internal team to run their own marketing campaigns.</p>
+        <details class="exp-more">
+          <summary>Details</summary>
+          <ul>
+            <li>Developed and maintained the company website to support marketing campaign launches.</li>
+            <li>Trained staff on running and managing marketing campaigns independently.</li>
+            <li>Created and updated web content and campaign-related digital assets.</li>
+            <li>Provided technical support and troubleshooting throughout the contract.</li>
+          </ul>
+        </details>
+      </div>
+
+      <div class="exp-card">
+        <div class="exp-card-top">
           <div class="exp-role">Website & Digital Operations Specialist</div>
-          <div class="exp-org">Core Migrations | Remote</div>
+          <div class="exp-date">2025 – 2026</div>
+        </div>
+        <div class="exp-org">Core Migrations | Remote</div>
+        <p class="exp-lead">Managed and maintained WordPress sites, building and optimizing landing pages in Elementor.</p>
+        <details class="exp-more">
+          <summary>Details</summary>
           <ul>
             <li>Managed and maintained WordPress websites, including page updates, content changes, and ongoing site improvements.</li>
             <li>Built and optimized landing pages using Elementor.</li>
@@ -471,13 +537,18 @@
             <li>Provided technical support for website issues, plugins, and client requests.</li>
             <li>Collaborated with stakeholders to improve digital operations and user experience.</li>
           </ul>
-        </div>
+        </details>
       </div>
-      <div class="exp-row">
-        <div class="exp-date">2024 – 2025</div>
-        <div>
+
+      <div class="exp-card">
+        <div class="exp-card-top">
           <div class="exp-role">Operations Lead & VA Manager</div>
-          <div class="exp-org">VA Masters | Remote</div>
+          <div class="exp-date">2024 – 2025</div>
+        </div>
+        <div class="exp-org">VA Masters | Remote</div>
+        <p class="exp-lead">Supervised a team of Virtual Assistants and coordinated executive scheduling and daily operations.</p>
+        <details class="exp-more">
+          <summary>Details</summary>
           <ul>
             <li>Supervised Virtual Assistants while maintaining quality assurance standards.</li>
             <li>Coordinated executive scheduling and daily business operations.</li>
@@ -485,13 +556,18 @@
             <li>Served as communication bridge between executives, clients, and internal teams.</li>
             <li>Assisted in client onboarding and operational planning.</li>
           </ul>
-        </div>
+        </details>
       </div>
-      <div class="exp-row">
-        <div class="exp-date">2024 – 2025</div>
-        <div>
+
+      <div class="exp-card">
+        <div class="exp-card-top">
           <div class="exp-role">Operations Manager & Recruitment Specialist</div>
-          <div class="exp-org">BridgeCreation DPS | Remote | Contract</div>
+          <div class="exp-date">2024 – 2025</div>
+        </div>
+        <div class="exp-org">BridgeCreation DPS | Remote | Contract</div>
+        <p class="exp-lead">Led full-cycle recruitment for 30+ hires annually, cutting time-to-hire by 25%.</p>
+        <details class="exp-more">
+          <summary>Details</summary>
           <ul>
             <li>Led full-cycle recruitment for 30+ hires annually.</li>
             <li>Improved hiring efficiency, reducing time-to-hire by 25%.</li>
@@ -499,13 +575,18 @@
             <li>Managed recruitment operations from sourcing to onboarding.</li>
             <li>Coordinated communication between management and applicants.</li>
           </ul>
-        </div>
+        </details>
       </div>
-      <div class="exp-row">
-        <div class="exp-date">2018 – Present</div>
-        <div>
+
+      <div class="exp-card">
+        <div class="exp-card-top">
           <div class="exp-role">Executive Virtual Assistant</div>
-          <div class="exp-org">Freelance | Remote</div>
+          <div class="exp-date">2018 – Present</div>
+        </div>
+        <div class="exp-org">Freelance | Remote</div>
+        <p class="exp-lead">Managed executive calendars, inboxes, WordPress sites, and CRM systems for founders.</p>
+        <details class="exp-more">
+          <summary>Details</summary>
           <ul>
             <li>Managed executive calendars, inboxes, travel arrangements, and documentation.</li>
             <li>Maintained WordPress websites and landing pages.</li>
@@ -514,13 +595,18 @@
             <li>Assisted with client onboarding and administrative support.</li>
             <li>Supported founders with daily operations and project coordination.</li>
           </ul>
-        </div>
+        </details>
       </div>
-      <div class="exp-row">
-        <div class="exp-date">2020 – 2023</div>
-        <div>
+
+      <div class="exp-card">
+        <div class="exp-card-top">
           <div class="exp-role">Purchasing Manager</div>
-          <div class="exp-org">Cebu Sarah Inc.</div>
+          <div class="exp-date">2020 – 2023</div>
+        </div>
+        <div class="exp-org">Cebu Sarah Inc.</div>
+        <p class="exp-lead">Managed supplier sourcing and procurement, cutting costs 12% and stock shortages 35%.</p>
+        <details class="exp-more">
+          <summary>Details</summary>
           <ul>
             <li>Managed supplier sourcing and procurement operations.</li>
             <li>Negotiated supplier contracts to reduce purchasing costs (saving 12% annually).</li>
@@ -528,29 +614,27 @@
             <li>Coordinated purchasing logistics and vendor relationships.</li>
             <li>Supported business operations through procurement planning.</li>
           </ul>
-        </div>
+        </details>
       </div>
-      <div class="exp-row">
-        <div class="exp-date">—</div>
-        <div>
+
+      <div class="exp-card">
+        <div class="exp-card-top">
           <div class="exp-role">Teacher</div>
-          <div class="exp-org">S1 Talk</div>
-          <ul>
-            <li>Teach English language mostly to Chinese kids in a fun and engaging way.</li>
-          </ul>
+          <div class="exp-date">—</div>
         </div>
+        <div class="exp-org">S1 Talk</div>
+        <p class="exp-lead">Taught English language mostly to Chinese kids in a fun and engaging way.</p>
       </div>
-      <div class="exp-row">
-        <div class="exp-date">—</div>
-        <div>
+
+      <div class="exp-card">
+        <div class="exp-card-top">
           <div class="exp-role">Sales Admin & Finance Pool</div>
-          <div class="exp-org">Orix Metro Leasing and Finance Corp.</div>
-          <ul>
-            <li>Supported sales and finance teams with documentation, client records, and billing accuracy.</li>
-            <li>Ensured data accuracy and smooth administrative processes.</li>
-          </ul>
+          <div class="exp-date">—</div>
         </div>
+        <div class="exp-org">Orix Metro Leasing and Finance Corp.</div>
+        <p class="exp-lead">Supported sales and finance teams with documentation, client records, and billing accuracy.</p>
       </div>
+
     </div>
   </div>
 </section>
@@ -690,26 +774,108 @@
   </div>
 </section>
 
-<section>
+<section class="reveal" id="testimonials-section">
   <div class="wrap">
     <div class="section-head">
       <div class="eyebrow">What Clients Say</div>
       <h2>Testimonials</h2>
     </div>
-    <div class="test-grid">
-      <div class="test-card">
-        <div class="stars">★★★★★</div>
-        <p>“Communication was seamless and deadlines were always met. Our productivity improved significantly thanks to Hiroki's support and attention to detail.”</p>
-        <div class="test-by">— Marketing Manager</div>
+
+    <div class="test-wrap">
+      <div class="test-track" id="testTrack">
+
+        <div class="test-slide is-active">
+          <div class="test-card">
+            <div class="stars">★★★★★</div>
+            <p>"Communication was seamless and deadlines were always met. Our productivity improved significantly thanks to Hiroki's support and attention to detail."</p>
+            <div class="test-by"><b>Cebu Sarah Inc.</b></div>
+          </div>
+        </div>
+
+        <div class="test-slide">
+          <div class="test-card">
+            <div class="stars">★★★★★</div>
+            <p>"Detail-oriented and easy to work with. Hiroki helped streamline our systems and saved us countless hours every week."</p>
+            <div class="test-by"><b>Core Migrations</b></div>
+          </div>
+        </div>
+
+        <div class="test-slide">
+          <div class="test-card">
+            <div class="stars">★★★★★</div>
+            <p>"I really needed a right-hand man and a left one — this guy did just that. Fast, punctual, and most important of all, has common sense."</p>
+            <div class="test-by"><b>HwaSung Refrigeration</b></div>
+          </div>
+        </div>
+
       </div>
-      <div class="test-card">
-        <div class="stars">★★★★★</div>
-        <p>“Detail-oriented and easy to work with. Hiroki helped streamline our systems and saved us countless hours every week.”</p>
-        <div class="test-by">— Founder, Digital Agency</div>
+
+      <div class="test-nav">
+        <button class="test-arrow" id="testPrev" aria-label="Previous testimonial">←</button>
+        <div class="test-dots" id="testDots"></div>
+        <button class="test-arrow" id="testNext" aria-label="Next testimonial">→</button>
       </div>
     </div>
   </div>
 </section>
+
+<script>
+(function(){
+  const track = document.getElementById('testTrack');
+  const slides = Array.from(track.children);
+  const dotsWrap = document.getElementById('testDots');
+  const prevBtn = document.getElementById('testPrev');
+  const nextBtn = document.getElementById('testNext');
+  let index = 0;
+  let timer;
+
+  slides.forEach((_, i) => {
+    const dot = document.createElement('button');
+    dot.className = 'test-dot' + (i === 0 ? ' is-active' : '');
+    dot.setAttribute('aria-label', 'Go to testimonial ' + (i+1));
+    dot.addEventListener('click', () => goTo(i));
+    dotsWrap.appendChild(dot);
+  });
+  const dots = Array.from(dotsWrap.children);
+
+  function render(){
+    track.style.transform = 'translateX(-' + (index * 100) + '%)';
+    slides.forEach((s, i) => s.classList.toggle('is-active', i === index));
+    dots.forEach((d, i) => d.classList.toggle('is-active', i === index));
+  }
+  function goTo(i){
+    index = (i + slides.length) % slides.length;
+    render();
+    restart();
+  }
+  function next(){ goTo(index + 1); }
+  function prev(){ goTo(index - 1); }
+  function restart(){
+    clearInterval(timer);
+    timer = setInterval(next, 5500);
+  }
+
+  nextBtn.addEventListener('click', next);
+  prevBtn.addEventListener('click', prev);
+  track.parentElement.addEventListener('mouseenter', () => clearInterval(timer));
+  track.parentElement.addEventListener('mouseleave', restart);
+
+  render();
+  restart();
+
+  // Fade/slide the whole section up as it scrolls into view
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in-view');
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  revealEls.forEach(el => io.observe(el));
+})();
+</script>
 
 <section id="education" class="on-ink">
   <div class="wrap">
