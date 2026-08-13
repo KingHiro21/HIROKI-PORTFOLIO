@@ -4,9 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Hiroki Ichikawa — Executive Virtual Assistant & Operations Manager</title>
+<meta name="description" content="Operations-focused Executive Virtual Assistant with 6+ years supporting founders and growing businesses — executive support, CRM & automation, website management.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   :root{
     --ink:#13213b;
@@ -32,11 +33,7 @@
     font-size:17.5px;
     line-height:1.65;
   }
-  h1,h2,h3{
-    font-family:'Fraunces', serif;
-    margin:0;
-    color:inherit;
-  }
+  h1,h2,h3,h4{font-family:'Fraunces', serif; margin:0; color:inherit;}
   .eyebrow{
     font-family:'IBM Plex Mono', monospace;
     letter-spacing:.14em;
@@ -47,6 +44,7 @@
   a{color:inherit;}
   .wrap{max-width:1180px;margin:0 auto;padding:0 32px;}
   img{max-width:100%;display:block;}
+  :focus-visible{outline:2px solid var(--brass); outline-offset:3px;}
 
   /* ===== FOLDER TAB NAV ===== */
   .tabbar{
@@ -58,9 +56,17 @@
     max-width:1180px;margin:0 auto;padding:0 32px;
     display:flex; gap:2px; overflow-x:auto;
     scrollbar-width:none;
+    align-items:center;
   }
   .tabbar-inner::-webkit-scrollbar{display:none;}
-  .tabbar a{
+  .tab-name{
+    font-family:'Fraunces',serif; font-weight:600; font-size:.95rem; color:#f4f1e8;
+    padding:12px 22px 12px 0; margin-right:8px; white-space:nowrap;
+    text-decoration:none;
+    border-right:1px solid var(--line-dark);
+  }
+  .tab-name b{color:var(--brass-light); font-weight:600;}
+  .tabbar a.tab{
     font-family:'IBM Plex Mono', monospace;
     font-size:.72rem;
     letter-spacing:.08em;
@@ -76,20 +82,35 @@
     position:relative;
     top:1px;
   }
-  .tabbar a:hover{color:#fff; background:var(--ink-2);}
-  .tabbar a::before{content:attr(data-code) " ";color:var(--brass-light); font-weight:600;}
+  .tabbar a.tab:hover{color:#fff; background:var(--ink-2);}
+  .tabbar a.tab::before{content:attr(data-code) " ";color:var(--brass-light); font-weight:600;}
 
   /* ===== HERO ===== */
   .hero{
     background:
-      radial-gradient(1100px 500px at 85% -10%, rgba(184,134,59,.18), transparent 60%),
+      radial-gradient(1100px 500px at 85% -10%, rgba(184,134,59,.20), transparent 60%),
+      radial-gradient(700px 380px at -5% 110%, rgba(37,64,110,.9), transparent 65%),
       var(--ink);
     color:#f4f1e8;
-    padding:76px 0 96px;
+    padding:82px 0 0;
     border-bottom:1px solid var(--line-dark);
+    position:relative;
+    overflow:hidden;
+  }
+  .hero::before{
+    content:"";
+    position:absolute; inset:0;
+    background-image:
+      linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px);
+    background-size:44px 44px;
+    mask-image:radial-gradient(900px 600px at 30% 20%, #000 30%, transparent 75%);
+    pointer-events:none;
   }
   .hero-grid{
     display:grid; grid-template-columns:1.5fr 1fr; gap:56px; align-items:start;
+    position:relative;
+    padding-bottom:76px;
   }
   .hero .eyebrow{color:var(--brass-light); margin-bottom:18px;}
   .hero h1{
@@ -109,7 +130,7 @@
   }
   .role-strip b{color:#fff; font-weight:500;}
   .tagline{
-    margin-top:22px; max-width:46ch;
+    margin-top:22px; max-width:48ch;
     font-size:1.12rem;
     color:#dfe3ee;
   }
@@ -129,7 +150,7 @@
     transition:.2s;
   }
   .btn-brass{background:var(--brass); color:#1a1305; font-weight:600;}
-  .btn-brass:hover{background:var(--brass-light);}
+  .btn-brass:hover{background:var(--brass-light); transform:translateY(-1px);}
   .btn-outline{border-color:#4c5c82; color:#eef0f6;}
   .btn-outline:hover{border-color:var(--brass-light); color:var(--brass-light);}
 
@@ -167,22 +188,63 @@
     color:#fff; font-size:.7rem; display:flex; align-items:center; justify-content:center;
     flex:none;
   }
+  .avail-stamp{
+    position:absolute; right:18px; bottom:-16px;
+    font-family:'IBM Plex Mono',monospace; font-size:.68rem; font-weight:600; letter-spacing:.1em;
+    color:var(--ok); border:2px solid var(--ok); border-radius:3px;
+    padding:6px 10px; transform:rotate(-6deg); background:var(--paper);
+    text-transform:uppercase;
+  }
   .quote-tab{
-    margin-top:20px;
+    margin-top:34px;
     font-family:'Fraunces', serif; font-style:italic;
     font-size:1.05rem; color:#f4f1e8; line-height:1.4;
     border-left:2px solid var(--brass); padding-left:16px;
   }
-  .quote-tab b{font-style:normal; color:var(--brass-light); display:block; font-family:'IBM Plex Mono',monospace; font-size:.7rem; letter-spacing:.1em; text-transform:uppercase; margin-top:8px;}
+
+  /* stat ledger strip */
+  .stat-strip{
+    position:relative;
+    border-top:1px solid var(--line-dark);
+    background:rgba(0,0,0,.18);
+  }
+  .stat-strip .wrap{
+    display:grid; grid-template-columns:repeat(4,1fr);
+  }
+  .stat{
+    padding:24px 22px 22px;
+    border-left:1px solid var(--line-dark);
+  }
+  .stat:first-child{border-left:none;}
+  .stat b{
+    display:block;
+    font-family:'Fraunces',serif; font-weight:600;
+    font-size:clamp(1.5rem, 2.6vw, 2.1rem);
+    color:var(--brass-light); line-height:1.1;
+  }
+  .stat span{
+    font-family:'IBM Plex Mono',monospace; font-size:.7rem; letter-spacing:.08em;
+    text-transform:uppercase; color:#b7c1d9;
+  }
 
   /* ===== SECTION GENERIC ===== */
   section{padding:88px 0;}
-  .section-head{margin-bottom:48px; max-width:60ch;}
+  .section-head{margin-bottom:48px; max-width:62ch;}
   .section-head .eyebrow{color:var(--brass); margin-bottom:10px;}
   .section-head h2{font-size:clamp(1.8rem,3.4vw,2.5rem); font-weight:600;}
   .on-ink{background:var(--ink); color:#eef0f6;}
   .on-ink .section-head .eyebrow{color:var(--brass-light);}
   .on-ink2{background:var(--ink-2); color:#eef0f6;}
+
+  /* scroll reveal (only active when JS is running) */
+  .js .reveal{opacity:0; transform:translateY(22px); transition:opacity .7s ease, transform .7s ease;}
+  .js .reveal.in-view{opacity:1; transform:translateY(0);}
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    .reveal{opacity:1; transform:none; transition:none;}
+    .test-track{transition:none !important;}
+    *{transition-duration:.01ms !important; animation-duration:.01ms !important;}
+  }
 
   /* SERVICES */
   .grid-6{
@@ -192,7 +254,15 @@
   .svc-card{
     background:var(--paper); padding:32px 28px; min-height:220px;
     display:flex; flex-direction:column; gap:14px;
+    position:relative; overflow:hidden;
+    transition:background .25s ease;
   }
+  .svc-card::after{
+    content:""; position:absolute; left:0; top:0; height:3px; width:0;
+    background:var(--brass); transition:width .35s ease;
+  }
+  .svc-card:hover{background:#fffdf8;}
+  .svc-card:hover::after{width:100%;}
   .svc-code{
     font-family:'IBM Plex Mono', monospace; font-size:.72rem; color:var(--brass); letter-spacing:.08em;
   }
@@ -204,6 +274,12 @@
   .case-card{
     background:var(--ink-3); border:1px solid var(--line-dark); border-radius:4px; padding:28px 26px;
     display:flex; flex-direction:column; gap:14px; position:relative;
+    transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+  }
+  .case-card:hover{
+    transform:translateY(-4px);
+    border-color:var(--brass);
+    box-shadow:0 24px 44px -22px rgba(0,0,0,.55);
   }
   .case-tag{font-family:'IBM Plex Mono',monospace; font-size:.68rem; letter-spacing:.1em; color:var(--brass-light); text-transform:uppercase;}
   .case-card h3{font-size:1.15rem; font-weight:600; color:#fff;}
@@ -226,7 +302,9 @@
   .exp-card{
     background:var(--paper); border:1px solid var(--line); border-radius:4px;
     padding:24px 26px; display:flex; flex-direction:column;
+    transition:border-color .25s ease, box-shadow .25s ease;
   }
+  .exp-card:hover{border-color:var(--brass); box-shadow:0 16px 34px -22px rgba(19,33,59,.35);}
   .exp-card-top{display:flex; justify-content:space-between; align-items:baseline; gap:12px; flex-wrap:wrap;}
   .exp-card .exp-date{font-size:.72rem; white-space:nowrap;}
   .exp-card .exp-role{font-size:1.05rem;}
@@ -267,16 +345,18 @@
   .tool-badges span{
     font-family:'IBM Plex Mono',monospace; font-size:.78rem;
     background:var(--paper-2); border:1px solid var(--line); padding:7px 12px; border-radius:3px;
+    transition:border-color .2s ease, transform .2s ease;
   }
+  .tool-badges span:hover{border-color:var(--brass); transform:translateY(-1px);}
 
   /* INFRA */
-  .infra-grid{display:grid; grid-template-columns:repeat(5,1fr); gap:1px; background:var(--line); border:1px solid var(--line);}
-  .infra-card{background:var(--paper); padding:22px 18px;}
+  .infra-grid{display:grid; grid-template-columns:repeat(5,1fr); gap:1px; background:var(--line-dark); border:1px solid var(--line-dark);}
+  .infra-card{background:var(--ink-2); padding:22px 18px;}
   .infra-card h4{
     font-family:'IBM Plex Mono',monospace; font-size:.68rem; letter-spacing:.08em; text-transform:uppercase;
-    color:var(--brass); margin:0 0 8px;
+    color:var(--brass-light); margin:0 0 8px;
   }
-  .infra-card p{margin:0; font-size:.85rem; color:#2c3345;}
+  .infra-card p{margin:0; font-size:.85rem; color:#dfe3ee;}
 
   /* TESTIMONIALS — animated carousel */
   .test-wrap{position:relative; overflow:hidden;}
@@ -291,16 +371,31 @@
   }
   .test-card{
     background:var(--paper); border:1px solid var(--line); border-left:3px solid var(--brass);
-    padding:34px 38px; border-radius:2px;
+    padding:38px 42px 32px; border-radius:2px;
     opacity:.35; transform:scale(.97);
     transition:opacity .5s ease, transform .5s ease;
-    max-width:720px;
+    max-width:760px;
+    position:relative;
+  }
+  .test-card::before{
+    content:"“";
+    position:absolute; top:6px; left:20px;
+    font-family:'Fraunces',serif; font-size:4.4rem; line-height:1;
+    color:var(--brass); opacity:.28;
   }
   .test-slide.is-active .test-card{opacity:1; transform:scale(1);}
-  .test-card p{font-family:'Fraunces',serif; font-style:italic; font-size:1.22rem; margin:0 0 16px; line-height:1.5;}
-  .stars{color:var(--brass); font-size:.9rem; letter-spacing:2px;}
-  .test-by{font-family:'IBM Plex Mono',monospace; font-size:.78rem; color:#454e63; margin-top:10px;}
-  .test-by b{color:var(--ink); font-weight:600;}
+  .test-card p{font-family:'Fraunces',serif; font-style:italic; font-size:1.24rem; margin:0 0 20px; line-height:1.5;}
+  .stars{color:var(--brass); font-size:.9rem; letter-spacing:2px; margin-bottom:14px;}
+  .test-person{display:flex; align-items:center; gap:14px; margin-top:6px;}
+  .test-avatar{
+    width:44px; height:44px; border-radius:50%; flex:none;
+    background:var(--ink); color:var(--brass-light);
+    font-family:'Fraunces',serif; font-weight:600; font-size:1rem;
+    display:flex; align-items:center; justify-content:center;
+    border:2px solid var(--brass);
+  }
+  .test-by{font-family:'IBM Plex Mono',monospace; font-size:.78rem; color:#454e63; line-height:1.5;}
+  .test-by b{color:var(--ink); font-weight:600; display:block; font-size:.86rem;}
   .test-nav{display:flex; align-items:center; gap:18px; margin-top:30px;}
   .test-dots{display:flex; gap:9px;}
   .test-dot{
@@ -314,13 +409,10 @@
     font-family:'IBM Plex Mono',monospace; color:var(--ink); transition:.2s;
   }
   .test-arrow:hover{border-color:var(--brass); color:var(--brass); background:var(--paper-2);}
-  section.reveal{opacity:0; transform:translateY(18px); transition:opacity .7s ease, transform .7s ease;}
-  section.reveal.in-view{opacity:1; transform:translateY(0);}
 
   /* EDUCATION */
-  .edu-card{border:1px solid var(--line); border-radius:4px; padding:26px 28px; display:flex; justify-content:space-between; align-items:flex-start; gap:20px; flex-wrap:wrap;}
+  .edu-card{border:1px solid var(--line-dark); border-radius:4px; padding:26px 28px; display:flex; justify-content:space-between; align-items:flex-start; gap:20px; flex-wrap:wrap; background:var(--ink-3); color:#eef0f6;}
   .edu-card h3{font-size:1.15rem;}
-  .edu-card .exp-date{padding-top:0;}
 
   /* FOOTER */
   footer{background:var(--ink); color:#eef0f6; padding:76px 0 46px; border-top:1px solid var(--line-dark);}
@@ -338,6 +430,10 @@
 
   @media (max-width:900px){
     .hero-grid{grid-template-columns:1fr;}
+    .stat-strip .wrap{grid-template-columns:repeat(2,1fr);}
+    .stat:nth-child(3){border-left:none;}
+    .stat{border-top:1px solid var(--line-dark);}
+    .stat:nth-child(-n+2){border-top:none;}
     .grid-6{grid-template-columns:repeat(2,1fr);}
     .case-grid{grid-template-columns:1fr;}
     .skill-grid{grid-template-columns:1fr;}
@@ -350,24 +446,30 @@
     .grid-6{grid-template-columns:1fr;}
     .infra-grid{grid-template-columns:1fr;}
     .plan-card{transform:none;}
+    .test-card{padding:32px 24px 26px;}
+    .stat-strip .wrap{grid-template-columns:1fr 1fr; padding:0 20px;}
+    .wrap{padding:0 20px;}
   }
 </style>
 </head>
 <body>
+<script>document.documentElement.classList.add('js');</script>
 
 <nav class="tabbar">
   <div class="tabbar-inner">
-    <a href="#services" data-code="SVC">Services</a>
-    <a href="#cases" data-code="CSE">Case Studies</a>
-    <a href="#experience" data-code="EXP">Experience</a>
-    <a href="#skills" data-code="SKL">Skills</a>
-    <a href="#tools" data-code="TLS">Tools</a>
-    <a href="#education" data-code="EDU">Education</a>
-    <a href="#contact" data-code="CTC">Contact</a>
+    <a class="tab-name" href="#top">H.<b>Ichikawa</b></a>
+    <a class="tab" href="#services" data-code="SVC">Services</a>
+    <a class="tab" href="#cases" data-code="CSE">Case Studies</a>
+    <a class="tab" href="#experience" data-code="EXP">Experience</a>
+    <a class="tab" href="#skills" data-code="SKL">Skills</a>
+    <a class="tab" href="#tools" data-code="TLS">Tools</a>
+    <a class="tab" href="#testimonials-section" data-code="TST">Testimonials</a>
+    <a class="tab" href="#education" data-code="EDU">Education</a>
+    <a class="tab" href="#contact" data-code="CTC">Contact</a>
   </div>
 </nav>
 
-<header class="hero">
+<header class="hero" id="top">
   <div class="wrap hero-grid">
     <div>
       <div class="eyebrow">Detail-Oriented · Strategic · Reliable — I help you focus on growth</div>
@@ -375,12 +477,12 @@
       <div class="role-strip">
         <b>Executive Virtual Assistant</b>&nbsp;|&nbsp;<b>Operations Manager</b>&nbsp;|&nbsp;<b>Digital Systems Specialist</b>
       </div>
-      <p class="tagline">I help businesses streamline operations, scale efficiently, and stay organized so you can focus on growth.</p>
+      <p class="tagline">Operations-focused EVA with 6+ years supporting founders, executives, and growing businesses — executive support, CRM &amp; automation, procurement, and website management. I build organized systems so you can focus on growth.</p>
       <div class="contact-row">
         <a href="tel:09931318683">📞 0993-131-8683</a>
         <a href="tel:09497219606">📞 0949-721-9606</a>
         <a href="mailto:hirokiichikawa96@gmail.com">✉ hirokiichikawa96@gmail.com</a>
-        <span>📍 Based in Cebu City, PH — Available for Remote Work Worldwide</span>
+        <span>📍 Cebu City, PH — Available for Remote Work Worldwide</span>
       </div>
       <div class="cta-row">
         <a class="btn btn-brass" href="Hiroki_Ichikawa_Resume.pdf" download>⬇ Download Resume (PDF)</a>
@@ -398,27 +500,34 @@
           <li><span class="tick">✓</span> Operations</li>
           <li><span class="tick">✓</span> Growth</li>
         </ul>
+        <div class="avail-stamp">Available · Full-Time</div>
       </div>
       <div class="quote-tab">
         “Organized systems. Stronger businesses. Better results.”
       </div>
     </div>
   </div>
+  <div class="stat-strip">
+    <div class="wrap">
+      <div class="stat"><b>6+</b><span>Years of Experience</span></div>
+      <div class="stat"><b>30+</b><span>Hires Placed Annually</span></div>
+      <div class="stat"><b>12%</b><span>Annual Cost Savings</span></div>
+      <div class="stat"><b>35%</b><span>Fewer Stock Shortages</span></div>
+    </div>
+  </div>
 </header>
 
-<section id="services">
+<section id="services" class="reveal">
   <div class="wrap">
     <div class="section-head">
       <div class="eyebrow">What I Can Do For You</div>
       <h2>Services</h2>
     </div>
-  </div>
-  <div class="wrap">
     <div class="grid-6">
       <div class="svc-card">
         <div class="svc-code">SVC / EXEC</div>
-        <h3>Executive Support & Operations</h3>
-        <p>Inbox & calendar management, scheduling, travel, documentation, and day-to-day operations oversight.</p>
+        <h3>Executive Support &amp; Operations</h3>
+        <p>Inbox &amp; calendar management, scheduling, travel, documentation, and day-to-day operations oversight.</p>
       </div>
       <div class="svc-card">
         <div class="svc-code">SVC / MKT</div>
@@ -427,29 +536,29 @@
       </div>
       <div class="svc-card">
         <div class="svc-code">SVC / SYS</div>
-        <h3>Business Systems & CRM</h3>
+        <h3>Business Systems &amp; CRM</h3>
         <p>CRM setup (HubSpot, GoHighLevel), automation, SOP creation, and reporting systems.</p>
       </div>
       <div class="svc-card">
         <div class="svc-code">SVC / WEB</div>
-        <h3>Website & Tech Support</h3>
+        <h3>Website &amp; Tech Support</h3>
         <p>WordPress/Elementor management, landing pages, website updates, and technical support.</p>
       </div>
       <div class="svc-card">
         <div class="svc-code">SVC / PROC</div>
-        <h3>Procurement & Vendor Management</h3>
+        <h3>Procurement &amp; Vendor Management</h3>
         <p>Supplier sourcing, negotiation, inventory management, and cost reduction strategies.</p>
       </div>
       <div class="svc-card">
         <div class="svc-code">SVC / DSGN</div>
-        <h3>Graphic & Design Support</h3>
+        <h3>Graphic &amp; Design Support</h3>
         <p>Branded graphics, presentations, social media visuals, and marketing materials.</p>
       </div>
     </div>
   </div>
 </section>
 
-<section id="cases" class="on-ink2">
+<section id="cases" class="on-ink2 reveal">
   <div class="wrap">
     <div class="section-head">
       <div class="eyebrow">Proof Of Work</div>
@@ -468,8 +577,8 @@
         </div>
       </div>
       <div class="case-card">
-        <div class="case-tag">Case / Hiring & Operations Scaling</div>
-        <h3>Hiring & Operations Scaling</h3>
+        <div class="case-tag">Case / Hiring &amp; Operations Scaling</div>
+        <h3>Hiring &amp; Operations Scaling</h3>
         <div class="case-client">Client: BridgeCreation DPS</div>
         <p><b>Problem:</b> Slow hiring process and inefficient recruitment.</p>
         <p><b>What I Did:</b> Led full-cycle recruitment, optimized hiring workflow, improved candidate filtering system.</p>
@@ -479,21 +588,21 @@
         </div>
       </div>
       <div class="case-card">
-        <div class="case-tag">Case / Executive Support</div>
-        <h3>Executive Support (Freelance)</h3>
-        <div class="case-client">Clients: Multiple (3–5 at a time)</div>
-        <p><b>Problem:</b> Disorganized operations and overloaded executives.</p>
-        <p><b>What I Did:</b> Managed inbox, calendar, coordination, reporting & bookkeeping, and acted as communication bridge.</p>
+        <div class="case-tag">Case / Web &amp; Digital Operations</div>
+        <h3>Website &amp; Digital Operations</h3>
+        <div class="case-client">Clients: Core Migrations · HwaSung Refrigeration</div>
+        <p><b>Problem:</b> Websites and campaigns needed hands-on upkeep the internal teams couldn't cover.</p>
+        <p><b>What I Did:</b> Managed WordPress/Elementor sites, launched campaign-ready pages, and trained staff to run marketing independently.</p>
         <div class="stamp-row">
-          <span class="stamp">✓ Improved workflow efficiency</span>
-          <span class="stamp">✓ Increased productivity</span>
+          <span class="stamp">✓ On-time project delivery</span>
+          <span class="stamp">✓ Team trained &amp; self-sufficient</span>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<section id="experience">
+<section id="experience" class="reveal">
   <div class="wrap">
     <div class="section-head">
       <div class="eyebrow">Professional Experience</div>
@@ -504,8 +613,8 @@
 
       <div class="exp-card">
         <div class="exp-card-top">
-          <div class="exp-role">Web Developer & Marketing Trainer</div>
-          <div class="exp-date">Jul – Sep 2026</div>
+          <div class="exp-role">Web Developer &amp; Marketing Trainer</div>
+          <div class="exp-date">Jul – Aug 2026</div>
         </div>
         <div class="exp-org">HwaSung Refrigeration | Contract</div>
         <p class="exp-lead">Built out the company website and trained the internal team to run their own marketing campaigns.</p>
@@ -522,7 +631,7 @@
 
       <div class="exp-card">
         <div class="exp-card-top">
-          <div class="exp-role">Website & Digital Operations Specialist</div>
+          <div class="exp-role">Website &amp; Digital Operations Specialist</div>
           <div class="exp-date">2025 – 2026</div>
         </div>
         <div class="exp-org">Core Migrations | Remote</div>
@@ -542,7 +651,7 @@
 
       <div class="exp-card">
         <div class="exp-card-top">
-          <div class="exp-role">Operations Lead & VA Manager</div>
+          <div class="exp-role">Operations Lead &amp; VA Manager</div>
           <div class="exp-date">2024 – 2025</div>
         </div>
         <div class="exp-org">VA Masters | Remote</div>
@@ -561,7 +670,7 @@
 
       <div class="exp-card">
         <div class="exp-card-top">
-          <div class="exp-role">Operations Manager & Recruitment Specialist</div>
+          <div class="exp-role">Operations Manager &amp; Recruitment Specialist</div>
           <div class="exp-date">2024 – 2025</div>
         </div>
         <div class="exp-org">BridgeCreation DPS | Remote | Contract</div>
@@ -569,11 +678,10 @@
         <details class="exp-more">
           <summary>Details</summary>
           <ul>
-            <li>Led full-cycle recruitment for 30+ hires annually.</li>
-            <li>Improved hiring efficiency, reducing time-to-hire by 25%.</li>
-            <li>Partnered with executives on workforce planning and retention strategies.</li>
             <li>Managed recruitment operations from sourcing to onboarding.</li>
+            <li>Improved hiring workflow and candidate screening.</li>
             <li>Coordinated communication between management and applicants.</li>
+            <li>Partnered with executives on workforce planning and retention strategies.</li>
           </ul>
         </details>
       </div>
@@ -617,84 +725,66 @@
         </details>
       </div>
 
-      <div class="exp-card">
-        <div class="exp-card-top">
-          <div class="exp-role">Teacher</div>
-          <div class="exp-date">—</div>
-        </div>
-        <div class="exp-org">S1 Talk</div>
-        <p class="exp-lead">Taught English language mostly to Chinese kids in a fun and engaging way.</p>
-      </div>
-
-      <div class="exp-card">
-        <div class="exp-card-top">
-          <div class="exp-role">Sales Admin & Finance Pool</div>
-          <div class="exp-date">—</div>
-        </div>
-        <div class="exp-org">Orix Metro Leasing and Finance Corp.</div>
-        <p class="exp-lead">Supported sales and finance teams with documentation, client records, and billing accuracy.</p>
-      </div>
-
     </div>
   </div>
 </section>
 
-<section id="skills" class="on-ink">
+<section id="skills" class="on-ink reveal">
   <div class="wrap">
     <div class="section-head">
       <div class="eyebrow">Core Competencies</div>
-      <h2>Skills & Expertise</h2>
+      <h2>Skills &amp; Expertise</h2>
     </div>
     <div class="skill-grid">
       <div class="skill-card">
-        <h3>Executive & Operations</h3>
+        <h3>Executive &amp; Operations</h3>
         <ul>
-          <li>Executive Assistance & Scheduling</li>
+          <li>Executive Assistance &amp; Scheduling</li>
           <li>Operations Management</li>
           <li>Workflow Optimization</li>
-          <li>SOP Creation & Process Automation</li>
+          <li>SOP Creation &amp; Process Automation</li>
         </ul>
       </div>
       <div class="skill-card">
-        <h3>Leadership & Strategy</h3>
+        <h3>CRM &amp; Automation</h3>
         <ul>
-          <li>Leadership & Team Coordination</li>
-          <li>Business Strategy Support</li>
-          <li>Talent Acquisition & Recruitment</li>
-          <li>Workforce Planning</li>
+          <li>CRM Management (HubSpot &amp; GoHighLevel)</li>
+          <li>Reporting &amp; Documentation</li>
+          <li>Email Management</li>
+          <li>Talent Acquisition &amp; Recruitment</li>
         </ul>
       </div>
       <div class="skill-card">
-        <h3>Communication & Client Management</h3>
+        <h3>Communication &amp; Client Management</h3>
         <ul>
-          <li>Client & Staff Communication</li>
+          <li>Client &amp; Staff Communication</li>
           <li>Executive Coordination</li>
-          <li>Inbox & Calendar Management</li>
-          <li>Documentation & Reporting</li>
+          <li>Inbox &amp; Calendar Management</li>
+          <li>Team Leadership &amp; Coordination</li>
         </ul>
       </div>
       <div class="skill-card">
-        <h3>Finance & Business Support</h3>
+        <h3>Procurement &amp; Business Support</h3>
         <ul>
-          <li>Bookkeeping & Reporting</li>
-          <li>Procurement & Vendor Negotiation</li>
+          <li>Procurement &amp; Vendor Management</li>
           <li>Inventory Management</li>
+          <li>Bookkeeping &amp; Reporting</li>
         </ul>
       </div>
       <div class="skill-card">
-        <h3>Digital & Creative</h3>
+        <h3>Digital &amp; Creative</h3>
         <ul>
-          <li>Graphic Design (Canva)</li>
-          <li>WordPress & Elementor</li>
+          <li>WordPress &amp; Elementor</li>
           <li>Website Management</li>
-          <li>Content & Social Media Support</li>
+          <li>Graphic Design (Canva)</li>
+          <li>Social Media Management</li>
         </ul>
       </div>
     </div>
   </div>
 </section>
 
-<section id="tools">
+<section id="tools" class="reveal">
   <div class="wrap">
     <div class="section-head">
       <div class="eyebrow">Technology Proficiency</div>
@@ -702,32 +792,32 @@
     </div>
     <div class="tool-groups">
       <div class="tool-group">
-        <h3>Productivity & Work Management</h3>
+        <h3>Productivity &amp; Admin</h3>
         <div class="tool-badges">
           <span>Google Workspace</span><span>Microsoft Office</span><span>Notion</span>
           <span>ClickUp</span><span>Asana</span><span>Trello</span><span>Slack</span><span>Zoom</span>
         </div>
       </div>
       <div class="tool-group">
-        <h3>CRM & Marketing</h3>
+        <h3>CRM &amp; Marketing</h3>
         <div class="tool-badges">
-          <span>HubSpot</span><span>GoHighLevel</span><span>Social Media Scheduling</span><span>Email Management</span>
+          <span>GoHighLevel</span><span>HubSpot</span><span>Social Media Scheduling</span><span>Email Management</span>
         </div>
       </div>
       <div class="tool-group">
-        <h3>Web & Development</h3>
+        <h3>Website</h3>
         <div class="tool-badges">
           <span>WordPress</span><span>Elementor</span>
         </div>
       </div>
       <div class="tool-group">
-        <h3>Design & Content</h3>
+        <h3>Design</h3>
         <div class="tool-badges">
           <span>Canva</span><span>Adobe Express</span>
         </div>
       </div>
       <div class="tool-group">
-        <h3>Marketing & Scheduling</h3>
+        <h3>Marketing</h3>
         <div class="tool-badges">
           <span>Meta Business Suite</span><span>Buffer</span>
         </div>
@@ -743,10 +833,10 @@
   </div>
 </section>
 
-<section class="on-ink2">
+<section class="on-ink2 reveal">
   <div class="wrap">
     <div class="section-head">
-      <div class="eyebrow">Setup & Reliability</div>
+      <div class="eyebrow">Setup &amp; Reliability</div>
       <h2>Remote Work Infrastructure</h2>
     </div>
     <div class="infra-grid">
@@ -788,7 +878,10 @@
           <div class="test-card">
             <div class="stars">★★★★★</div>
             <p>"Communication was seamless and deadlines were always met. Our productivity improved significantly thanks to Hiroki's support and attention to detail."</p>
-            <div class="test-by"><b>Cebu Sarah Inc.</b></div>
+            <div class="test-person">
+              <div class="test-avatar">JA</div>
+              <div class="test-by"><b>Joselito Alayon</b>Cebu Sarah Inc.</div>
+            </div>
           </div>
         </div>
 
@@ -796,7 +889,10 @@
           <div class="test-card">
             <div class="stars">★★★★★</div>
             <p>"Detail-oriented and easy to work with. Hiroki helped streamline our systems and saved us countless hours every week."</p>
-            <div class="test-by"><b>Core Migrations</b></div>
+            <div class="test-person">
+              <div class="test-avatar">GW</div>
+              <div class="test-by"><b>Greg Whitworth</b>Core Migrations</div>
+            </div>
           </div>
         </div>
 
@@ -804,7 +900,10 @@
           <div class="test-card">
             <div class="stars">★★★★★</div>
             <p>"I really needed a right-hand man and a left one — this guy did just that. Fast, punctual, and most important of all, has common sense."</p>
-            <div class="test-by"><b>HwaSung Refrigeration</b></div>
+            <div class="test-person">
+              <div class="test-avatar">A</div>
+              <div class="test-by"><b>Mr. Ace</b>HwaSung Refrigeration</div>
+            </div>
           </div>
         </div>
 
@@ -818,6 +917,55 @@
     </div>
   </div>
 </section>
+
+<section id="education" class="on-ink reveal">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Education</div>
+      <h2>Background</h2>
+    </div>
+    <div class="edu-card">
+      <div>
+        <h3>University Of Cebu, Lapu-Lapu Mandaue</h3>
+        <div class="exp-org" style="color:#aeb8cf;">Computer Technology</div>
+        <p style="margin-top:10px; font-size:1rem; color:#e3e7f0;">Relevant coursework in Design and Project Management.</p>
+      </div>
+      <div class="exp-date" style="color:var(--brass-light);">2015 – 2020</div>
+    </div>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="wrap footer-grid">
+    <div>
+      <div class="eyebrow" style="color:var(--brass-light); margin-bottom:12px;">Let's Work Together</div>
+      <h2>Send me a message and let's talk about how I can help streamline your operations and drive results.</h2>
+      <div class="cta-row">
+        <a class="btn btn-brass" href="mailto:hirokiichikawa96@gmail.com">✉ Email Me</a>
+        <a class="btn btn-outline" href="Hiroki_Ichikawa_Resume.pdf" download>⬇ Download Resume</a>
+        <a class="btn btn-outline" href="Hiroki_Ichikawa_Portfolio.jpg" download>⬇ Download Portfolio</a>
+      </div>
+    </div>
+    <div class="foot-props">
+      <div class="foot-prop">
+        <span class="eyebrow">Strategic</span>
+        <p>Solutions tailored to your goals</p>
+      </div>
+      <div class="foot-prop">
+        <span class="eyebrow">Efficient</span>
+        <p>Operations that save you time &amp; money</p>
+      </div>
+      <div class="foot-prop">
+        <span class="eyebrow">Reliable</span>
+        <p>You can count on me and my work</p>
+      </div>
+    </div>
+  </div>
+  <div class="wrap foot-bottom">
+    <span>Hiroki Ichikawa — Cebu City, Philippines</span>
+    <span>hirokiichikawa96@gmail.com · 0993-131-8683 / 0949-721-9606</span>
+  </div>
+</footer>
 
 <script>
 (function(){
@@ -863,7 +1011,7 @@
   render();
   restart();
 
-  // Fade/slide the whole section up as it scrolls into view
+  // Scroll-triggered reveal for all sections
   const revealEls = document.querySelectorAll('.reveal');
   const io = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
@@ -872,59 +1020,10 @@
         io.unobserve(entry.target);
       }
     });
-  }, { threshold: 0.15 });
+  }, { threshold: 0.12 });
   revealEls.forEach(el => io.observe(el));
 })();
 </script>
-
-<section id="education" class="on-ink">
-  <div class="wrap">
-    <div class="section-head">
-      <div class="eyebrow">Education</div>
-      <h2>Background</h2>
-    </div>
-    <div class="edu-card" style="background:var(--ink-3); border-color:var(--line-dark); color:#eef0f6;">
-      <div>
-        <h3>University Of Cebu, Lapu-Lapu Mandaue</h3>
-        <div class="exp-org" style="color:#aeb8cf;">Computer Technology</div>
-        <p style="margin-top:10px; font-size:1rem; color:#e3e7f0;">Relevant coursework in Design and Project Management.</p>
-      </div>
-      <div class="exp-date" style="color:var(--brass-light);">2015 – 2020</div>
-    </div>
-  </div>
-</section>
-
-<footer id="contact">
-  <div class="wrap footer-grid">
-    <div>
-      <div class="eyebrow" style="color:var(--brass-light); margin-bottom:12px;">Let's Work Together</div>
-      <h2>Send me a message and let's talk about how I can help streamline your operations and drive results.</h2>
-      <div class="cta-row">
-        <a class="btn btn-brass" href="Hiroki_Ichikawa_Resume.pdf" download>⬇ Download Resume</a>
-        <a class="btn btn-outline" href="Hiroki_Ichikawa_Portfolio.jpg" download>⬇ Download Portfolio</a>
-        <a class="btn btn-outline" href="mailto:hirokiichikawa96@gmail.com">✉ Email Me</a>
-      </div>
-    </div>
-    <div class="foot-props">
-      <div class="foot-prop">
-        <span class="eyebrow">Strategic</span>
-        <p>Solutions tailored to your goals</p>
-      </div>
-      <div class="foot-prop">
-        <span class="eyebrow">Efficient</span>
-        <p>Operations that save you time & money</p>
-      </div>
-      <div class="foot-prop">
-        <span class="eyebrow">Reliable</span>
-        <p>You can count on me and my work</p>
-      </div>
-    </div>
-  </div>
-  <div class="wrap foot-bottom">
-    <span>Hiroki Ichikawa — Cebu City, Philippines</span>
-    <span>hirokiichikawa96@gmail.com · 0993-131-8683 / 0949-721-9606</span>
-  </div>
-</footer>
 
 </body>
 </html>
